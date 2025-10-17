@@ -1,6 +1,6 @@
-[submodule "Suma"]
-	path = Suma
+[submodule "Calculadora/Suma"]
+	path = Calculadora/Suma
 	url = https://github.com/2025-b-sw-construccion-gr2/becl-suma.git
-[submodule "Resta"]
-	path = Resta
+[submodule "Calculadora/Resta"]
+	path = Calculadora/Resta
 	url = https://github.com/2025-b-sw-construccion-gr2/becl-resta.git
