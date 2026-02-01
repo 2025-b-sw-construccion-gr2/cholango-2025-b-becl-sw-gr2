@@ -1,46 +1,79 @@
-# 🔄 Convertidor de Unidades
+# 🔄 UnitCon
 
-Proyecto simple de conversión de unidades desarrollado con Python, implementando buenas prácticas de desarrollo y CI/CD con GitHub Actions.
+**UnitCon** es un proyecto en Python orientado a la conversión de unidades, desarrollado como parte del examen práctico. El proyecto cuenta con pruebas automatizadas y un pipeline de Integración Continua (CI) configurado con GitHub Actions para garantizar la calidad del código.
+
+---
 
 ## 📋 Descripción
 
-Este proyecto permite convertir entre diferentes unidades de medida:
+UnitCon permite convertir entre diferentes unidades de medida:
 - **Temperatura**: Celsius ↔ Fahrenheit
 - **Longitud**: Metros ↔ Pies
 - **Peso**: Kilogramos ↔ Libras
 
-## 🚀 Cómo ejecutar el proyecto localmente
+---
 
-### Prerrequisitos
+## 📁 Estructura del Proyecto
 
-- Python 3.8 o superior
-- pip (gestor de paquetes de Python)
-
-### Instalación
-
-1. **Clonar el repositorio**
-```bash
-git clone <url-de-tu-repositorio>
-cd unit_converter
+```
+cholango-2025-b-becl-sw-gr2/
+├── Examen-002/
+│   └── UnitCon/
+│       ├── src/
+│       │   └── converter.py
+│       ├── tests/
+│       │   └── test_converter.py
+│       ├── requirements.txt
+│       └── README.md
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── .gitignore
+└── venv/ (ignorado)
 ```
 
-2. **Crear un entorno virtual (opcional pero recomendado)**
+---
+
+## 🧰 Requisitos
+
+- Python 3.9 o superior
+- Git
+- pip
+
+---
+
+## ▶️ Ejecución del proyecto localmente
+
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone <URL-del-repositorio>
+cd Examen-002/UnitCon
+```
+
+### 2️⃣ Crear y activar entorno virtual
+
+#### Windows
+
 ```bash
 python -m venv venv
-
-# En Windows:
 venv\Scripts\activate
+```
 
-# En Linux/Mac:
+#### Linux / macOS
+
+```bash
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-3. **Instalar dependencias**
+### 3️⃣ Instalar dependencias
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Ejecutar el programa
+### 4️⃣ Ejecutar el proyecto
 
 ```bash
 python src/converter.py
@@ -48,7 +81,7 @@ python src/converter.py
 
 El programa mostrará un menú interactivo donde podrás seleccionar el tipo de conversión y el valor a convertir.
 
-### Ejemplo de uso
+### 💡 Ejemplo de uso
 
 ```
 === Convertidor de Unidades ===
@@ -64,206 +97,304 @@ Ingrese el valor a convertir: 25
 25.0°F = -3.89°C
 ```
 
-## 🧪 Ejecutar las pruebas
+---
+
+## 🧪 Ejecución de pruebas
+
+### Ejecutar todas las pruebas
 
 ```bash
-# Ejecutar todas las pruebas
 pytest tests/
-
-# Ejecutar con reporte de cobertura
-pytest tests/ --cov=src --cov-report=term
 ```
 
-## 🛠️ Pipeline de CI/CD
+### Ejecutar pruebas con reporte de cobertura
 
-El proyecto utiliza **GitHub Actions** para automatizar las verificaciones de calidad de código. El pipeline se ejecuta automáticamente en cada `push` y `pull request`.
+```bash
+pytest tests/ --cov=src --cov-report=term --cov-report=html
+```
 
-### Estructura del Pipeline
+El reporte HTML se genera en la carpeta `htmlcov/`.
 
-El archivo de configuración se encuentra en `.github/workflows/ci.yml` y ejecuta los siguientes jobs en orden:
+---
 
-#### 1️⃣ **Lint** (Análisis estático)
-- **Herramienta**: Flake8
-- **Propósito**: Verifica que el código siga las convenciones de estilo PEP 8
-- **Se ejecuta en**: `src/` y `tests/`
-- **Falla si**: Hay errores de sintaxis o violaciones de estilo
+## 🔄 Pipeline de Integración Continua (CI)
+
+El proyecto cuenta con un pipeline de CI configurado en GitHub Actions, definido en:
+
+```
+.github/workflows/ci.yml
+```
+
+### 📌 Eventos que disparan el pipeline
+
+El pipeline se ejecuta automáticamente cuando ocurre alguno de los siguientes eventos:
+
+**Push a las ramas:**
+- `main`
+- `develop`
+- `feature/*`
+
+**Pull Request hacia:**
+- `main`
+- `develop`
+
+---
+
+## ⚙️ Etapas del pipeline y orden de ejecución
+
+El pipeline se ejecuta en el siguiente orden:
+
+### 1️⃣ **Lint** (Lint Code)
+
+| Característica | Detalle |
+|----------------|---------|
+| **Herramienta** | Flake8 |
+| **Valida** | Estilo de código, errores de sintaxis, buenas prácticas en Python |
+| **Falla si** | Existen errores de linting |
 
 ```bash
 # Ejecutar localmente:
 flake8 src/ tests/
 ```
 
-#### 2️⃣ **Format Check** (Verificación de formato)
-- **Herramienta**: Black
-- **Propósito**: Valida que el código esté correctamente formateado
-- **Se ejecuta en**: `src/` y `tests/`
-- **Falla si**: El código no está formateado según Black
+---
+
+### 2️⃣ **Format** (Check Code Format)
+
+| Característica | Detalle |
+|----------------|---------|
+| **Herramienta** | Black |
+| **Valida** | Que el código cumpla con el formato estándar |
+| **Modo** | `--check` (no modifica el código) |
 
 ```bash
 # Ejecutar localmente:
 black --check src/ tests/
 
-# Auto-formatear código:
+# Auto-formatear:
 black src/ tests/
 ```
 
-#### 3️⃣ **Test** (Pruebas unitarias)
-- **Herramienta**: pytest + pytest-cov
-- **Propósito**: Ejecuta todas las pruebas unitarias y genera reporte de cobertura
-- **Cobertura**: Mide qué porcentaje del código está cubierto por tests
-- **Genera**: Reporte HTML con resultados detallados
+---
+
+### 3️⃣ **Test** (Run Tests)
+
+| Característica | Detalle |
+|----------------|---------|
+| **Herramienta** | Pytest |
+| **Valida** | Pruebas unitarias y cobertura de código |
+| **Genera** | Reporte en consola y reporte HTML de cobertura |
+
+El reporte HTML se sube como artefacto del workflow.
 
 ```bash
 # Ejecutar localmente:
 pytest tests/ --cov=src --cov-report=term --cov-report=html
 ```
 
-#### 4️⃣ **Build** (Construcción)
-- **Depende de**: lint, format y test (deben pasar primero)
-- **Propósito**: Verifica que el proyecto se pueda compilar y empaquetar
-- **Genera**: Artefactos del build en la carpeta `build/`
-- **Valida**: Sintaxis de Python y crea paquete de distribución
+---
+
+### 4️⃣ **Build** (Build Project)
+
+> **Nota:** Se ejecuta **solo si** Lint, Format y Test pasan correctamente.
+
+| Característica | Detalle |
+|----------------|---------|
+| **Valida** | Sintaxis del archivo principal (`py_compile`) |
+| **Genera** | Carpeta `build/` con copia del código fuente y archivo `BUILD_SUCCESS.txt` |
+
+Los artefactos del build se suben al workflow.
 
 ```bash
 # Ejecutar localmente:
 python -m py_compile src/converter.py
 ```
 
-### Flujo de ejecución
+---
+
+## 📊 Flujo de ejecución del pipeline
 
 ```
-┌─────────────────┐
-│  Push/PR        │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    │ Trigger │
-    └────┬────┘
-         │
-    ┌────┴──────────────────────────┐
-    │                               │
-┌───▼────┐  ┌────────┐  ┌──────┐   │
-│ Lint   │  │ Format │  │ Test │   │ (Paralelo)
-└───┬────┘  └────┬───┘  └───┬──┘   │
-    │            │          │       │
-    └────────────┴──────────┴───────┘
-                 │
-            ┌────▼────┐
-            │ Build   │ (Solo si todos pasan)
-            └─────────┘
+┌─────────────────────────────────────┐
+│   Push / Pull Request               │
+└──────────────┬──────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────┐
+│         Pipeline Trigger             │
+└──────────────┬───────────────────────┘
+               │
+      ┌────────┴────────┐
+      │                 │
+┌─────▼─────┐  ┌────────▼────────┐  ┌─────────▼──────┐
+│   Lint    │  │     Format      │  │      Test      │
+│ (Flake8)  │  │     (Black)     │  │    (Pytest)    │
+└─────┬─────┘  └────────┬────────┘  └─────────┬──────┘
+      │                 │                      │
+      └─────────────────┴──────────────────────┘
+                        │
+                        ▼
+              ┌─────────────────┐
+              │      Build      │
+              │  (Solo si pasan │
+              │   todos los     │
+              │    anteriores)  │
+              └─────────────────┘
 ```
 
-### Estados del Pipeline
+---
 
-- ✅ **Success**: Todos los jobs pasaron correctamente
-- ❌ **Failure**: Al menos un job falló
-- 🟡 **In Progress**: El pipeline está ejecutándose
+## 📦 Artefactos generados por el pipeline
 
-### Visualizar resultados
+El pipeline genera y almacena los siguientes artefactos:
 
-1. Ve a la pestaña **Actions** en tu repositorio de GitHub
-2. Selecciona el workflow run que quieres revisar
-3. Haz clic en cada job para ver logs detallados
-4. Descarga los artefactos generados (reportes de cobertura y build)
+| Artefacto | Descripción |
+|-----------|-------------|
+| **coverage-report** | Reporte de cobertura de pruebas en formato HTML |
+| **build-artifacts** | Carpeta `build/` con el código compilado y archivo de éxito |
 
-## 📁 Estructura del Proyecto
+Estos pueden descargarse desde la pestaña **Actions** en GitHub.
 
-```
-unit_converter/
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml              # Configuración del pipeline CI/CD
-│
-├── src/
-│   ├── __init__.py
-│   └── converter.py            # Código principal del convertidor
-│
-├── tests/
-│   ├── __init__.py
-│   └── test_converter.py       # Pruebas unitarias
-│
-├── .flake8                     # Configuración de Flake8
-├── pyproject.toml              # Configuración de Black
-├── requirements.txt            # Dependencias del proyecto
-└── README.md                   # Este archivo
-```
+---
 
-## 🔄 Flujo de trabajo con Git
+## 📸 Evidencias de ejecución exitosa
+
+A continuación se muestran las capturas de pantalla que demuestran la ejecución exitosa del pipeline:
+
+### ✅ Creación de Pull Request (PR)
+
+![Pull Request creado](./docs/images/pull-request-create.png)
+
+*Pull Request de base: "develop" y compare: "feature"*
+
+---
+
+### ✅ Pipeline completo exitoso
+
+![Pipeline exitoso](./docs/images/pipeline-success.png)
+
+*Vista general del workflow ejecutado correctamente en GitHub Actions*
+
+---
+
+### 🔍 Detalle de los Jobs
+
+![Jobs del pipeline](./docs/images/pipeline-jobs.png)
+
+*Los 4 jobs (Lint, Format, Test, Build) ejecutados exitosamente*
+
+---
+
+### 🧪 Reporte de cobertura de pruebas
+
+![Cobertura de pruebas](./docs/images/coverage-report.png)
+
+*Reporte de cobertura generado por pytest mostrando >90% de cobertura*
+
+---
+
+### 🔀 Pull Request aprobado
+
+![Pull Request](./docs/images/pull-request.png)
+
+*Pull Request con todos los checks en verde y listo para merge*
+
+---
+
+### 🔀 Merging develop-feature
+
+![Merge-D-F](./docs/images/merge-develop-feature.png)
+
+*Merge entre develop desde feature*
+
+---
+
+## 🧾 Consideraciones adicionales
+
+- ✅ El entorno virtual (`venv`) está correctamente ignorado mediante `.gitignore`
+- ✅ El pipeline utiliza versiones actualizadas de las actions oficiales
+- ✅ El proyecto sigue una estructura clara y mantenible
+- ✅ Todas las pruebas unitarias cubren casos normales y casos edge
+- ✅ El código cumple con PEP 8 y está formateado con Black
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+| Tecnología | Versión | Propósito |
+|------------|---------|-----------|
+| **Python** | 3.9+ | Lenguaje de programación |
+| **Pytest** | 7.4.3 | Framework de testing |
+| **pytest-cov** | 4.1.0 | Plugin de cobertura |
+| **Flake8** | 6.1.0 | Linter de código |
+| **Black** | 23.12.1 | Formateador de código |
+| **GitHub Actions** | - | CI/CD Pipeline |
+
+---
+
+## 🚀 Flujo de trabajo con Git
 
 ### Crear una nueva feature
 
 ```bash
-# 1. Crear rama desde develop
+# 1. Actualizar develop
 git checkout develop
 git pull origin develop
-git checkout -b feature/nombre-de-tu-feature
 
-# 2. Hacer cambios y commits
+# 2. Crear nueva rama
+git checkout -b feature/nombre-de-la-feature
+
+# 3. Hacer cambios y commits
 git add .
-git commit -m "Descripción de los cambios"
+git commit -m "feat: descripción del cambio"
 
-# 3. Push a GitHub
-git push origin feature/nombre-de-tu-feature
+# 4. Push a GitHub
+git push origin feature/nombre-de-la-feature
 ```
 
 ### Crear Pull Request
 
-1. Ve a GitHub y crea un Pull Request desde tu rama `feature/*` hacia `develop`
-2. Espera a que el pipeline de CI pase (todos los checks en verde ✅)
-3. Si trabajas en equipo, solicita revisión de código
-4. Una vez aprobado, haz merge del PR
+1. Ve a GitHub y crea un Pull Request desde `feature/*` hacia `develop`
+2. Espera a que el pipeline pase ✅
+3. Solicita revisión (si aplica)
+4. Merge una vez aprobado
 
-### Buenas prácticas
+---
 
-- ✅ Siempre trabaja en ramas `feature/*`
-- ✅ Asegúrate de que el pipeline pase antes de hacer merge
-- ✅ Escribe mensajes de commit descriptivos
-- ✅ Mantén el código formateado con Black
-- ✅ Agrega tests para nuevas funcionalidades
+## 📚 Comandos útiles
 
-## 📊 Cobertura de Tests
-
-El proyecto incluye tests para:
-- ✅ Conversiones de temperatura
-- ✅ Conversiones de longitud
-- ✅ Conversiones de peso
-- ✅ Casos edge (valores cero, negativos)
-
-Para ver el reporte de cobertura HTML:
-```bash
-pytest tests/ --cov=src --cov-report=html
-# Abre htmlcov/index.html en tu navegador
-```
-
-## 🛡️ Verificaciones de Calidad
-
-Antes de hacer commit, puedes ejecutar todas las verificaciones localmente:
+### Verificar calidad del código localmente
 
 ```bash
-# 1. Lint
+# Lint
 flake8 src/ tests/
 
-# 2. Format
+# Format check
 black --check src/ tests/
 
-# 3. Tests
-pytest tests/ --cov=src
+# Tests con cobertura
+pytest tests/ --cov=src --cov-report=term
 
-# 4. Build
+# Build
 python -m py_compile src/converter.py
 ```
 
-## 📝 Dependencias
+### Ver reporte de cobertura HTML
 
-- **pytest**: Framework de testing
-- **pytest-cov**: Plugin para medir cobertura de código
-- **flake8**: Linter para Python
-- **black**: Formateador automático de código
+```bash
+pytest tests/ --cov=src --cov-report=html
+# Abrir htmlcov/index.html en el navegador
+```
+
+---
 
 ## 👤 Autor
 
-Proyecto desarrollado para el examen de Construcción y Evolución de Software.
+Proyecto desarrollado para el **Examen 02** de Construcción y Evolución de Software.
+
+**Repositorio**: cholango-2025-b-becl-sw-gr2
+
+---
 
 ## 📄 Licencia
 
@@ -271,12 +402,40 @@ Este proyecto es de uso académico.
 
 ---
 
-**Nota**: Este README incluye toda la información necesaria para ejecutar el proyecto, entender el pipeline de CI/CD y seguir las buenas prácticas de desarrollo.
+## 🆘 Solución de problemas
+
+### El pipeline falla en Lint
+
+```bash
+# Ver errores específicos
+flake8 src/ tests/
+
+# Auto-formatear puede resolver muchos problemas
+black src/ tests/
+```
+
+### El pipeline falla en Tests
+
+```bash
+# Ver detalles del error
+pytest tests/ -v
+
+# Ejecutar un test específico
+pytest tests/test_converter.py::TestTemperatureConversion -v
+```
+
+### GitHub Actions no se ejecuta
+
+1. Ve a **Settings** → **Actions** → **General**
+2. Verifica que Actions esté habilitado
+3. Selecciona "Allow all actions and reusable workflows"
 
 ---
 
-## 🎓 Notas del Examen
-- Pipeline configurado correctamente
-- Todas las pruebas pasando
-- Código formateado y limpio
+<div align="center">
 
+**🎓 Proyecto académico - Examen de Construcción y Evolución de Software**
+
+⭐ Si este proyecto te fue útil, no olvides darle una estrella ⭐
+
+</div>
