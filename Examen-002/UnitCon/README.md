@@ -279,3 +279,4 @@ Este proyecto es de uso académico.
 - Pipeline configurado correctamente
 - Todas las pruebas pasando
 - Código formateado y limpio
+
