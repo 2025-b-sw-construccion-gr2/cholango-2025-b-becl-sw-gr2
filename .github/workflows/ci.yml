@@ -10,6 +10,9 @@ jobs:
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Examen-002/UnitCon
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
@@ -31,6 +34,9 @@ jobs:
   format:
     name: Check Code Format
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Examen-002/UnitCon
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
@@ -52,6 +58,9 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Examen-002/UnitCon
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
@@ -79,6 +88,9 @@ jobs:
   build:
     name: Build Project
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Examen-002/UnitCon
     needs: [lint, format, test]
     steps:
       - name: Checkout código
