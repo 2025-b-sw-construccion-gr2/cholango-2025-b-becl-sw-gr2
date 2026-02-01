@@ -272,3 +272,10 @@ Este proyecto es de uso académico.
 ---
 
 **Nota**: Este README incluye toda la información necesaria para ejecutar el proyecto, entender el pipeline de CI/CD y seguir las buenas prácticas de desarrollo.
+
+---
+
+## 🎓 Notas del Examen
+- Pipeline configurado correctamente
+- Todas las pruebas pasando
+- Código formateado y limpio
