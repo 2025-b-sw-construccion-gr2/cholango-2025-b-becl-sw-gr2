@@ -1,0 +1,18 @@
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | build
+  | dist
+)/
+'''
+[tool.coverage.run]
+omit = [
+    "src/__init__.py",
+    "src/converter.py:if __name__ == '__main__'",
+]
