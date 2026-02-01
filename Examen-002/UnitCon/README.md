@@ -263,7 +263,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### ✅ Creación de Pull Request (PR)
 
-![Pull Request creado](./docs/images/pull-request-create.png)
+![Pull Request creado](../docs/images/pull-request-create.png)
 
 *Pull Request de base: "develop" y compare: "feature"*
 
@@ -271,7 +271,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### ✅ Pipeline completo exitoso
 
-![Pipeline exitoso](./docs/images/pipeline-success.png)
+![Pipeline exitoso](../docs/images/pipeline-success.png)
 
 *Vista general del workflow ejecutado correctamente en GitHub Actions*
 
@@ -279,7 +279,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### 🔍 Detalle de los Jobs
 
-![Jobs del pipeline](./docs/images/pipeline-jobs.png)
+![Jobs del pipeline](../docs/images/pipeline-jobs.png)
 
 *Los 4 jobs (Lint, Format, Test, Build) ejecutados exitosamente*
 
@@ -287,7 +287,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### 🧪 Reporte de cobertura de pruebas
 
-![Cobertura de pruebas](./docs/images/coverage-report.png)
+![Cobertura de pruebas](../docs/images/coverage-report.png)
 
 *Reporte de cobertura generado por pytest mostrando >90% de cobertura*
 
@@ -295,7 +295,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### 🔀 Pull Request aprobado
 
-![Pull Request](./docs/images/pull-request.png)
+![Pull Request](../docs/images/pull-request.png)
 
 *Pull Request con todos los checks en verde y listo para merge*
 
@@ -303,7 +303,7 @@ A continuación se muestran las capturas de pantalla que demuestran la ejecució
 
 ### 🔀 Merging develop-feature
 
-![Merge-D-F](./docs/images/merge-develop-feature.png)
+![Merge-D-F](../docs/images/merge-develop-feature.png)
 
 *Merge entre develop desde feature*
 
